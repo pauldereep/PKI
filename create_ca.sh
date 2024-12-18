@@ -9,6 +9,9 @@ CA_CERT="$CA_DIR/ca.crt"
 openssl genrsa -out $CA_KEY 4096
 chmod 600 $CA_KEY
 
+
+# mon ca_cert est root car il est auto signé par la clé privée générée
+
 openssl req -x509 -new -nodes -key $CA_KEY -sha256 -days 3650 -out $CA_CERT \
     -subj "/C=FR/ST=Paris/L=Paris/O=MyPKI/OU=RootCA/CN=RootCA"
 
