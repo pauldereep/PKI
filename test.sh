@@ -10,15 +10,15 @@ CA_CERT=$1
 CERT=$2
 KEY=$3
 
-# Vérifier les détails du certificat
-echo "Vérification des détails du certificat..."
+# Vérifications des détails du certificat
+echo "Vérification des détails du certificat"
 openssl x509 -in $CERT -text -noout
 
-# Vérifier la chaîne de confiance
+# Vériication de la chaîne de confiance
 echo "Vérification de la chaîne de confiance..."
 openssl verify -CAfile $CA_CERT $CERT
 
-# Vérifier la correspondance entre la clé privée et le certificat
+# Vérification de la correspondance entre la clé privée et le certificat
 echo "Vérification de la correspondance entre la clé privée et le certificat..."
 CERT_MODULUS=$(openssl x509 -noout -modulus -in $CERT | openssl md5)
 KEY_MODULUS=$(openssl rsa -noout -modulus -in $KEY | openssl md5)
@@ -29,7 +29,7 @@ else
     echo "La clé privée ne correspond pas au certificat."
 fi
 
-# Vérifier les dates de validité
+# Vérification des dates de validité
 echo "Vérification des dates de validité..."
 openssl x509 -in $CERT -noout -dates
 
